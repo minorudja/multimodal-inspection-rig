@@ -35,9 +35,20 @@ void loop() {
 }
 
 void rotateTurntable(int angle, float speed){
+    // Specify direction of rotation
+    if (angle >= 0){
+        digitalWrite(DIR_PIN,HIGH);
+    } else{
+        digitalWrite(DIR_PIN,LOW);
+    }
+
     // Angle Check (Angle below 180 degrees)
     if (abs(angle) > 180){
-        angle = int(angle/angle * 180);
+        angle = 180;
+    }
+
+    if (abs(angle) > 180){
+        angle = int((angle/abs(angle)) * 180); // To maintain sign (direction) of the angle
     }
 
     // Speed Check (Must be between 0.01 and 1)
@@ -50,6 +61,8 @@ void rotateTurntable(int angle, float speed){
     // Need to change once stepper motor characteristics known or after calibration
     int steps = abs(angle)*(1/0.225);
     float usDelay = (1/speed) * 70;
+
+    
 
     for (int i = 0; i < steps; i++){ 
         digitalWrite(STEP_PIN, HIGH); 
