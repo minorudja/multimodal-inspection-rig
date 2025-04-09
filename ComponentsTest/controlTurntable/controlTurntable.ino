@@ -1,35 +1,36 @@
 /* Pin Definitions */ 
-// Stepper Motor Pins
-#define DIR_PIN 2
-#define STEP_PIN 3
-
 // Button Pin
-#define BUTTONPIN 4
+#define BUTTON_PIN 2
+
+// Stepper Motor Pins
+#define TT_DIR_PIN 3
+#define TT_STEP_PIN 4
 
 // Status LED Pin
-#define PIN_STATUS_LED 13 
+#define STATUS_LED_PIN 13 
 
 // Function Definitions
-void rotateTurntable(int angle, int speed);
+void rotateTurntable(int angle, float speed);
 
 void setup() {
     Serial.begin(9600);
 
     // Stepper Motor Pins
-    pinMode(DIR_PIN, OUTPUT); 
-    pinMode(STEP_PIN, OUTPUT); 
+    pinMode(TT_DIR_PIN, OUTPUT); 
+    pinMode(TT_STEP_PIN, OUTPUT);
+    pinMode(STATUS_LED_PIN, OUTPUT);
   
     // Button Pin
-    pinMode(BUTTONPIN, INPUT);
+    pinMode(BUTTON_PIN, INPUT);
   
 }
 
 void loop() {
     // turn status LED on
-    digitalWrite(PIN_STATUS_LED,  HIGH);
+    digitalWrite(STATUS_LED_PIN,  HIGH);
    
-    if (digitalRead(BUTTONPIN) == HIGH){
-        rotateTurntable();    // start photoshooting
+    if (digitalRead(BUTTON_PIN) == HIGH){
+        rotateTurntable(10,0.1);
     }
     delay(2000); // delay for button debouncing
 }
@@ -37,9 +38,9 @@ void loop() {
 void rotateTurntable(int angle, float speed){
     // Specify direction of rotation
     if (angle >= 0){
-        digitalWrite(DIR_PIN,HIGH);
+        digitalWrite(TT_DIR_PIN,HIGH);
     } else{
-        digitalWrite(DIR_PIN,LOW);
+        digitalWrite(TT_DIR_PIN,LOW);
     }
 
     // Angle Check (Angle below 180 degrees)
@@ -59,10 +60,10 @@ void rotateTurntable(int angle, float speed){
     float usDelay = (1/speed) * 70;
 
     for (int i = 0; i < steps; i++){ 
-        digitalWrite(STEP_PIN, HIGH); 
+        digitalWrite(TT_STEP_PIN, HIGH); 
         delayMicroseconds(usDelay); 
     
-        digitalWrite(STEP_PIN, LOW); 
+        digitalWrite(TT_STEP_PIN, LOW); 
         delayMicroseconds(usDelay);
     }
 }
