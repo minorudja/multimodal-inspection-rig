@@ -1,1 +1,1 @@
-# multimodal-inspection-rig
+# Multimodal Inspection Rig Project
