@@ -1,0 +1,4 @@
+path: dataset
+train: train/images
+val: val/images
+names: ['cavity', 'coil_break', 'coil_overlap', 'fracture', 'hole']
