@@ -1,0 +1,4 @@
+path: dataset
+train: train/images
+val: val/images
+names: ['toy_sample_1', 'toy_sample_2', 'toy_sample_3', 'toy_sample_4']
