@@ -1,3 +1,7 @@
 pyrealsense2
 numpy
 opencv-python
+ultralytics
+torch
+matplotlib
+scikit-learn
